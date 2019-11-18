@@ -1,6 +1,9 @@
 import { Component, OnInit , ViewChild} from '@angular/core';
+import { Router } from '@angular/router';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { survey } from '../models/survey.model';
+import { SurveyService } from '../services/survey.service';
 
 export interface PeriodicElement {
   name: string;
@@ -9,17 +12,9 @@ export interface PeriodicElement {
   symbol: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+const ELEMENT_DATA: survey[] = [
+  {"survey_id":1,"survey_name_fr":"premier ","survey_name_en":"premier en","survey_name_pt":"premier pt","survey_description_fr":"premier survey","survey_description_en":"premier survey en","survey_description_pt":"premier survey fr","created":"2019-11-12T00:00:00.000Z","updated":"2019-11-12T00:00:00.000Z","survey_status":"ini","survey_begin_date":"2019-11-12T00:00:00.000Z","survey_end_date":"2020-11-12T00:00:00.000Z"},
+  {"survey_id":2,"survey_name_fr":"deuxieme ","survey_name_en":"deuxieme en","survey_name_pt":"deuxieme pt","survey_description_fr":"deuxieme survey","survey_description_en":"deuxieme survey en","survey_description_pt":"deuxieme survey fr","created":"2019-11-12T00:00:00.000Z","updated":"2019-11-12T00:00:00.000Z","survey_status":"ini","survey_begin_date":"2018-11-12T00:00:00.000Z","survey_end_date":"2019-11-11T00:00:00.000Z"}
 ];
 
 
@@ -30,15 +25,53 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class ListSurveyComponent implements OnInit {
 
- //  constructor() { }
+  constructor(  
+    private router: Router,
+    private surveyService:SurveyService
+    ) { }
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  private surveys: any = null;
+  displayedColumns: string[] = ['survey_id', 'survey_name_fr', 'survey_description_fr', 'survey_begin_date', 'survey_end_date'];
+  
+  dataSource = new MatTableDataSource([]);
+
+  
+  
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
+ 
   ngOnInit() {
+
+    this.getSurveys();
+    // this.surveyService.retrieveAllSurveys()
+    //                      .pipe()
+    //                      .subscribe( data => {
+    //                         console.log(data);
+    //                      }); 
+                      
+ //   this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+    //console.log(ELEMENT_DATA2);
     this.dataSource.sort = this.sort;
   }
   
+  getSurveys(): void {
+    console.log( 'ici');
+		this.surveyService.getSurveys()
+			.subscribe(Surveys => {
+        this.surveys = Surveys;
+        console.log(this.surveys.data as survey[]);
+        this.dataSource = new MatTableDataSource(this.surveys.data as survey[]);
+      }  );
+	}
+
+	selectSurvey(Survey: survey): void {
+		let link = ['edit', Survey.survey_id];
+		this.router.navigate(link);
+	}
+
+   goAdd() {
+		let link = ['add'];
+		this.router.navigate(link);     
+   }
 }

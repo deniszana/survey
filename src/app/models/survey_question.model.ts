@@ -1,6 +1,6 @@
 export class survey_question {
     survey_question_id; number;
-    survey_id; number;
+    survey_id: number;
     question_order : number;
     question_label_fr : string;
     question_label_en : string;

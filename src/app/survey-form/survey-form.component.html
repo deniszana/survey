@@ -1,0 +1,118 @@
+<form *ngIf="survey" (ngSubmit)="onSubmit()" #surveyForm="ngForm">
+  
+    <div class="row">
+      <div class="col s8 offset-s2">
+        <div class="card-panel">
+  
+          <!-- Survey survey_name_fr -->
+          <div class="form-group">
+            <label for="survey_name_fr">survey_name_fr</label>
+            <input type="text" class="form-control" id="survey_name_fr"
+                    required
+                    pattern="^[a-zA-Z0-9àéèç]{1,25}$"
+                   [(ngModel)]="survey.survey_name_fr" name="survey_name_fr"
+                   #name="ngModel">
+  
+            <div [hidden]="name.valid || name.pristine"
+                  class="card-panel red accent-1">
+                  survey_name_fr est requis (1-25).
+            </div>
+          </div>
+  
+          <!-- Survey survey_name_en -->
+          <div class="form-group">
+            <label for="survey_name_en">survey_name_en</label>
+            <input type="text" class="form-control" id="survey_name_en"
+                    required
+                    pattern="^[a-zA-Z0-9àéèç]{1,25}$"
+                   [(ngModel)]="survey.survey_name_en" name="survey_name_en"
+                   #name="ngModel">
+  
+            <div [hidden]="name.valid || name.pristine"
+                  class="card-panel red accent-1">
+                  survey_name_en est requis (1-25).
+            </div>
+          </div>
+
+         <!-- Survey survey_name_pt -->
+         <div class="form-group">
+            <label for="survey_name_pt">survey_name_pt</label>
+            <input type="text" class="form-control" id="survey_name_pt"
+                    required
+                    pattern="^[a-zA-Z0-9àéèç]{1,25}$"
+                   [(ngModel)]="survey.survey_name_pt" name="survey_name_pt"
+                   #name="ngModel">
+  
+            <div [hidden]="name.valid || name.pristine"
+                  class="card-panel red accent-1">
+                  survey_name_pt est requis (1-25).
+            </div>
+          </div>
+ 
+         <!-- Survey survey_description_fr -->
+         <div class="form-group">
+            <label for="survey_description_fr">survey_description_fr</label>
+            <input type="text" class="form-control" id="survey_description_fr"
+                    required
+                    pattern="^[a-zA-Z0-9àéèç]{1,25}$"
+                   [(ngModel)]="survey.survey_description_fr" name="survey_description_fr"
+                   #name="ngModel">
+  
+            <div [hidden]="name.valid || name.pristine"
+                  class="card-panel red accent-1">
+                  survey_description_fr est requis (1-25).
+            </div>
+          </div>
+           
+         <!-- Survey survey_description_en -->
+         <div class="form-group">
+            <label for="survey_description_en">survey_description_en</label>
+            <input type="text" class="form-control" id="survey_description_en"
+                    required
+                    pattern="^[a-zA-Z0-9àéèç]{1,25}$"
+                   [(ngModel)]="survey.survey_description_en" name="survey_description_en"
+                   #name="ngModel">
+  
+            <div [hidden]="name.valid || name.pristine"
+                  class="card-panel red accent-1">
+                  survey_description_en est requis (1-25).
+            </div>
+          </div>
+
+         <!-- Survey survey_description_pt -->
+         <div class="form-group">
+            <label for="survey_description_pt">survey_description_pt</label>
+            <input type="text" class="form-control" id="survey_description_pt"
+                    required
+                    pattern="^[a-zA-Z0-9àéèç]{1,25}$"
+                   [(ngModel)]="survey.survey_description_pt" name="survey_description_pt"
+                   #name="ngModel">
+  
+            <div [hidden]="name.valid || name.pristine"
+                  class="card-panel red accent-1">
+                  survey_description_pt est requis (1-25).
+            </div>
+          </div>
+
+  
+  
+  
+          <!-- Submit button -->
+          <div class="divider"></div>
+          <div class="section center">
+            <button type="submit"
+              class="waves-effect waves-light btn"  >
+              Valider</button>
+              <button type="button" (click)="goList()">retour</button>
+              <button type="button" *ngIf="!isAddForm" (click)="delete(survey)">Supprimer</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </form>
+  
+  <h3 *ngIf="!survey" class="center">
+    En cours
+  </h3>
+  

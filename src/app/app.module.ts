@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClient , HttpHandler, HttpHeaders} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -50,13 +52,20 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { FormsModule }   from '@angular/forms';
+import { SurveyService } from './services/survey.service';
+import { SurveyFormComponent } from './survey-form/survey-form.component';
+import { AddComponent } from './add/add.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     Notfound404Component,
     ListSurveyComponent,
-    DetailSurveyComponent
+    DetailSurveyComponent,
+    SurveyFormComponent,
+    AddComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +76,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    MatInputModule
   ],
   exports: [
     A11yModule,
@@ -113,7 +125,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     PortalModule,
     ScrollingModule,
   ],
-  providers: [],
+  providers: [SurveyService ,HttpClient ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
