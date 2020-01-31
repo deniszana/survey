@@ -9,7 +9,7 @@ db.auth = false;
 db.database = 'survey';
 db.username = 'root';
 db.port = '9696';
-db.password = '';
+db.password = '123';
 db.table_prefix = '';
 
 //Pagination

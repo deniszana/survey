@@ -16,7 +16,8 @@ module.exports = (function () {
 
 	//Initialize database
 	var sequelize = new Sequelize(db.database, db.username, db.password,{
-		host: '127.0.0.1',
+		host: 'localhost',
+		port: 3307,
 		dialect: 'mysql' 
 	  });
 	var TABLE_PREFIX = db.table_prefix;
